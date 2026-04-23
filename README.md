@@ -4,11 +4,11 @@ Minimal Floorp browser UI via `userChrome.css`. Hides the address bar off-screen
 
 ## Preview
 
-**Collapsed** — just the tab bar with navigation and window controls:
+**Collapsed** shows just the tab bar with navigation and window controls:
 
 ![Collapsed](collapsed.png)
 
-**Expanded** — full toolbar on Ctrl+L:
+**Expanded** shows the full toolbar on Ctrl+L:
 
 ![Expanded](expanded.png)
 
