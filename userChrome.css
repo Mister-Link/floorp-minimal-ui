@@ -1,0 +1,151 @@
+@-moz-document url("chrome://browser/content/browser.xhtml") {
+	/* Fix tab bar clipping at top, make room for floating back/fwd (left) and window controls (right) */
+	#TabsToolbar {
+		padding-top: 3px !important;
+		padding-inline-start: 80px !important;
+		padding-inline-end: 50px !important;
+	}
+
+	#nav-bar {
+		margin-top: -42px !important;
+		transition: margin-top 0.22s cubic-bezier(0.2, 0.9, 0.2, 1) !important;
+		visibility: hidden !important;
+		pointer-events: none !important;
+		position: relative !important;
+		z-index: 1 !important;
+	}
+
+	/* Back/forward + window controls: punch through visibility, translate down into tab bar level.
+	   transform doesn't affect layout so nothing shifts around. */
+	#back-button,
+	#forward-button,
+	.titlebar-buttonbox-container {
+		visibility: visible !important;
+		pointer-events: auto !important;
+		position: relative !important;
+		z-index: 500 !important;
+		transform: translateY(42px) !important;
+		transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1) !important;
+	}
+
+	/* Urlbar stays focusable for Ctrl+L — visibility: visible so it can receive focus,
+	   opacity: 0 so it's invisible, pointer-events: none so it can't be clicked. */
+	#urlbar {
+		visibility: visible !important;
+		opacity: 0 !important;
+		pointer-events: none !important;
+		transition: opacity 0.22s ease !important;
+	}
+
+	/* Restore urlbar when nav-bar is shown */
+	#nav-bar:focus-within #urlbar,
+	#nav-bar[id]:has(:focus-within) #urlbar {
+		opacity: 1 !important;
+		pointer-events: auto !important;
+	}
+
+	/* Show full nav-bar only on Ctrl+L focus */
+	#nav-bar:focus-within,
+	#nav-bar[id]:has(:focus-within) {
+		margin-top: 0 !important;
+		visibility: visible !important;
+		pointer-events: auto !important;
+		z-index: 100 !important;
+	}
+
+	/* Reset translate when full nav-bar is shown */
+	#nav-bar:focus-within #back-button,
+	#nav-bar:focus-within #forward-button,
+	#nav-bar:focus-within .titlebar-buttonbox-container,
+	#nav-bar[id]:has(:focus-within) #back-button,
+	#nav-bar[id]:has(:focus-within) #forward-button,
+	#nav-bar[id]:has(:focus-within) .titlebar-buttonbox-container {
+		transform: translateY(0) !important;
+	}
+
+	/* Lift toolbar above browser content so urlbar results can overlay */
+	#navigator-toolbox,
+	#navigator-toolbox.browser-toolbox-background,
+	toolbox#navigator-toolbox {
+		position: relative !important;
+		z-index: 2 !important;
+		overflow: visible !important;
+	}
+
+	#nav-bar {
+		overflow: visible !important;
+	}
+
+	/* Search results overlay everything */
+	#urlbar[open],
+	#urlbar[breakout][breakout-extend] {
+		z-index: 1000 !important;
+		overflow: visible !important;
+	}
+
+	.urlbarView {
+		position: relative !important;
+		z-index: 1000 !important;
+	}
+
+	.urlbarView-body-outer,
+	.urlbarView-body-inner {
+		overflow: visible !important;
+	}
+
+	#urlbar-container {
+		flex: 1 !important;
+		min-width: 0 !important;
+		display: flex !important;
+		overflow: visible !important;
+	}
+
+	#urlbar {
+		position: relative !important;
+		width: auto !important;
+		flex-grow: 1 !important;
+		margin-inline: 0 !important;
+		--urlbar-width: 100% !important;
+	}
+
+	#urlbar[breakout][breakout-extend] {
+		top: 0 !important;
+		left: 0 !important;
+		width: 100% !important;
+		height: 100% !important;
+	}
+
+	#urlbar-background {
+		width: 100% !important;
+		box-shadow: none !important;
+	}
+
+	.urlbar-input-container {
+		width: 100% !important;
+		padding-inline: 4px !important;
+	}
+
+	/* Hard cutoff for long URLs so ellipsis button always fits */
+	.urlbarView-row {
+		display: flex !important;
+		align-items: center !important;
+		overflow: hidden !important;
+	}
+
+	.urlbarView-row-inner {
+		flex: 1 !important;
+		min-width: 0 !important;
+		overflow: hidden !important;
+	}
+
+	.urlbarView-row-buttons {
+		flex-shrink: 0 !important;
+	}
+
+	.urlbarView-url,
+	.urlbarView-overflowable {
+		overflow: hidden !important;
+		text-overflow: ellipsis !important;
+		white-space: nowrap !important;
+	}
+}
