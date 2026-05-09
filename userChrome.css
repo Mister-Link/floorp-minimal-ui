@@ -28,9 +28,10 @@
 		transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1) !important;
 	}
 
-	/* Extension buttons: always clickable, no slide — nav-bar expanding brings them into view */
+	/* Toolbar popup buttons: always clickable, no slide — nav-bar expanding brings them into view */
 	#unified-extensions,
-	.webextension-browser-action {
+	.webextension-browser-action,
+	#downloads-button {
 		visibility: visible !important;
 		pointer-events: auto !important;
 		position: relative !important;
@@ -48,12 +49,16 @@
 
 	/* Restore urlbar when nav-bar is shown */
 	#nav-bar:focus-within #urlbar,
-	#nav-bar[id]:has(:focus-within) #urlbar {
+	#nav-bar[id]:has(:focus-within) #urlbar,
+	#main-window:has(#mainPopupSet > panel .panel-viewcontainer[panelopen]) #nav-bar #urlbar,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="showing"]) #nav-bar #urlbar,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="open"]) #nav-bar #urlbar,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar #urlbar {
 		opacity: 1 !important;
 		pointer-events: auto !important;
 	}
 
-	/* Show full nav-bar only on Ctrl+L focus */
+	/* Show full nav-bar on Ctrl+L focus */
 	#nav-bar:focus-within,
 	#nav-bar[id]:has(:focus-within) {
 		margin-top: 0 !important;
@@ -62,7 +67,7 @@
 		z-index: 100 !important;
 	}
 
-	/* Reset translate when full nav-bar is shown (focus or extension popup open) */
+	/* Reset translate when full nav-bar is shown (focus or toolbar popup open) */
 	#nav-bar:focus-within #back-button,
 	#nav-bar:focus-within #forward-button,
 	#nav-bar:focus-within .titlebar-buttonbox-container,
@@ -74,13 +79,34 @@
 	#nav-bar:has(#unified-extensions[open]) .titlebar-buttonbox-container,
 	#nav-bar:has(.webextension-browser-action[open]) #back-button,
 	#nav-bar:has(.webextension-browser-action[open]) #forward-button,
-	#nav-bar:has(.webextension-browser-action[open]) .titlebar-buttonbox-container {
+	#nav-bar:has(.webextension-browser-action[open]) .titlebar-buttonbox-container,
+	#nav-bar:has(#downloads-button[open]) #back-button,
+	#nav-bar:has(#downloads-button[open]) #forward-button,
+	#nav-bar:has(#downloads-button[open]) .titlebar-buttonbox-container,
+	#main-window:has(#mainPopupSet > panel .panel-viewcontainer[panelopen]) #nav-bar #back-button,
+	#main-window:has(#mainPopupSet > panel .panel-viewcontainer[panelopen]) #nav-bar #forward-button,
+	#main-window:has(#mainPopupSet > panel .panel-viewcontainer[panelopen]) #nav-bar .titlebar-buttonbox-container,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="showing"]) #nav-bar #back-button,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="showing"]) #nav-bar #forward-button,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="showing"]) #nav-bar .titlebar-buttonbox-container,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="open"]) #nav-bar #back-button,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="open"]) #nav-bar #forward-button,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="open"]) #nav-bar .titlebar-buttonbox-container,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar #back-button,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar #forward-button,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar .titlebar-buttonbox-container {
 		transform: translateY(0) !important;
 	}
 
-	/* Keep nav-bar visible while an extension popup is open */
+	/* Keep nav-bar visible while a toolbar popup is open.
+	   Extension panels are attached to mainPopupSet, not nested under nav-bar. */
 	#nav-bar:has(#unified-extensions[open]),
-	#nav-bar:has(.webextension-browser-action[open]) {
+	#nav-bar:has(.webextension-browser-action[open]),
+	#nav-bar:has(#downloads-button[open]),
+	#main-window:has(#mainPopupSet > panel .panel-viewcontainer[panelopen]) #nav-bar,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="showing"]) #nav-bar,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="open"]) #nav-bar,
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar {
 		margin-top: 0 !important;
 		visibility: visible !important;
 		pointer-events: auto !important;
