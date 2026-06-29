@@ -53,7 +53,22 @@
 	#main-window:has(#mainPopupSet > panel .panel-viewcontainer[panelopen]) #nav-bar #urlbar,
 	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="showing"]) #nav-bar #urlbar,
 	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="open"]) #nav-bar #urlbar,
-	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar #urlbar {
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar #urlbar,
+	#main-window:has(#mainPopupSet > #notification-popup[panelopen="true"]) #nav-bar #urlbar,
+	#main-window:has(#notification-popup :is(
+		#addon-progress-notification,
+		#addon-install-confirmation-notification,
+		#addon-webext-permissions-notification,
+		#addon-install-blocked-notification,
+		#addon-install-failed-blocklist-notification
+	):not([hidden])) #nav-bar #urlbar,
+	#main-window:has(#mainPopupSet :is(
+		#addon-progress-notification,
+		#addon-install-confirmation-notification,
+		#addon-webext-permissions-notification,
+		#addon-install-blocked-notification,
+		#addon-install-failed-blocklist-notification
+	):not([hidden])) #nav-bar #urlbar {
 		opacity: 1 !important;
 		pointer-events: auto !important;
 	}
@@ -94,7 +109,52 @@
 	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="open"]) #nav-bar .titlebar-buttonbox-container,
 	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar #back-button,
 	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar #forward-button,
-	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar .titlebar-buttonbox-container {
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar .titlebar-buttonbox-container,
+	#main-window:has(#mainPopupSet > #notification-popup[panelopen="true"]) #nav-bar #back-button,
+	#main-window:has(#mainPopupSet > #notification-popup[panelopen="true"]) #nav-bar #forward-button,
+	#main-window:has(#mainPopupSet > #notification-popup[panelopen="true"]) #nav-bar .titlebar-buttonbox-container,
+	#main-window:has(#notification-popup :is(
+		#addon-progress-notification,
+		#addon-install-confirmation-notification,
+		#addon-webext-permissions-notification,
+		#addon-install-blocked-notification,
+		#addon-install-failed-blocklist-notification
+	):not([hidden])) #nav-bar #back-button,
+	#main-window:has(#notification-popup :is(
+		#addon-progress-notification,
+		#addon-install-confirmation-notification,
+		#addon-webext-permissions-notification,
+		#addon-install-blocked-notification,
+		#addon-install-failed-blocklist-notification
+	):not([hidden])) #nav-bar #forward-button,
+	#main-window:has(#notification-popup :is(
+		#addon-progress-notification,
+		#addon-install-confirmation-notification,
+		#addon-webext-permissions-notification,
+		#addon-install-blocked-notification,
+		#addon-install-failed-blocklist-notification
+	):not([hidden])) #nav-bar .titlebar-buttonbox-container,
+	#main-window:has(#mainPopupSet :is(
+		#addon-progress-notification,
+		#addon-install-confirmation-notification,
+		#addon-webext-permissions-notification,
+		#addon-install-blocked-notification,
+		#addon-install-failed-blocklist-notification
+	):not([hidden])) #nav-bar #back-button,
+	#main-window:has(#mainPopupSet :is(
+		#addon-progress-notification,
+		#addon-install-confirmation-notification,
+		#addon-webext-permissions-notification,
+		#addon-install-blocked-notification,
+		#addon-install-failed-blocklist-notification
+	):not([hidden])) #nav-bar #forward-button,
+	#main-window:has(#mainPopupSet :is(
+		#addon-progress-notification,
+		#addon-install-confirmation-notification,
+		#addon-webext-permissions-notification,
+		#addon-install-blocked-notification,
+		#addon-install-failed-blocklist-notification
+	):not([hidden])) #nav-bar .titlebar-buttonbox-container {
 		transform: translateY(0) !important;
 	}
 
@@ -106,7 +166,22 @@
 	#main-window:has(#mainPopupSet > panel .panel-viewcontainer[panelopen]) #nav-bar,
 	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="showing"]) #nav-bar,
 	#main-window:has(#mainPopupSet > :is(panel, menupopup)[state="open"]) #nav-bar,
-	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar {
+	#main-window:has(#mainPopupSet > :is(panel, menupopup)[open]) #nav-bar,
+	#main-window:has(#mainPopupSet > #notification-popup[panelopen="true"]) #nav-bar,
+	#main-window:has(#notification-popup :is(
+		#addon-progress-notification,
+		#addon-install-confirmation-notification,
+		#addon-webext-permissions-notification,
+		#addon-install-blocked-notification,
+		#addon-install-failed-blocklist-notification
+	):not([hidden])) #nav-bar,
+	#main-window:has(#mainPopupSet :is(
+		#addon-progress-notification,
+		#addon-install-confirmation-notification,
+		#addon-webext-permissions-notification,
+		#addon-install-blocked-notification,
+		#addon-install-failed-blocklist-notification
+	):not([hidden])) #nav-bar {
 		margin-top: 0 !important;
 		visibility: visible !important;
 		pointer-events: auto !important;
